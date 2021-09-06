@@ -5,7 +5,7 @@ This is code to do joint learning dimension reduction and clustering of single-c
 
 Wenming Wu, Xiaoke Ma*. "Network-based integrative analysis of single-cell transcriptomic and epigenomic data for cell types".
 
-The coding here is a generalization of the algorithm given in the paper. NIC is written in the MATLAB programming language. To use, please download the NIC folder and follow the instructions provided in the ¡°README.doc¡±.
+The coding here is a generalization of the algorithm given in the paper. NIC is written in the MATLAB programming language. To use, please download the NIC folder and follow the instructions provided in the "README.doc".
 
 Files:
 
