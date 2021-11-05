@@ -1,6 +1,6 @@
-function  [W,S,B,F,H,err1]=clustering_NIC(X,M,k,k2,alpha)
+function  [P,S,B,F,H,err1]=clustering_NIC(X,M,k,k2,alpha)
 %%%%The model----------------
-% min{W[l],S[l],S} sumTr(W[l]'X[l]L[l]X[l]'W[l])+alpha
+% min{P[l],S[l],S} sumTr(P[l]'X[l]L[l]X[l]'P[l])+alpha
 % sum||S[l]||^2+sum(\|S[l]-B[l]F\|^2+\|M[l]-H[l]F\|^2)
 % You only need to provide the above three inputs.
 % Notation:
@@ -19,8 +19,8 @@ function  [W,S,B,F,H,err1]=clustering_NIC(X,M,k,k2,alpha)
     m = length(X);
     [d{1},n] = size(X{1});
     [d{2},n] = size(X{2});
-%     W{1}=rand(d{1},k);
-%     W{2}=rand(d{2},k);
+%     P{1}=rand(d{1},k);
+%     P{2}=rand(d{2},k);
     for l=1:m
 %         options = [];
 %         option.Metric = 'Cosine';%≈∑ Ωæ‡¿Î
@@ -41,21 +41,21 @@ function  [W,S,B,F,H,err1]=clustering_NIC(X,M,k,k2,alpha)
         [Vy,Dy] = eig(Y);
         dy = diag(Dy);
         [t,v] = sort(dy,'ascend');
-        W{l} = Vy(:,v(1:k));
+        P{l} = Vy(:,v(1:k));
     end
     F = (fff{1}+fff{2})/2;
 for o = 1:iter
-%%%%%--------------Update variables W{l} by iteration------------
+%%%%%--------------Update variables P{l} by iteration------------
     for l = 1:m
-        %%========W{l}=========
+        %%========P{l}=========
         Y = X{l}*Ls{l}*X{l}';
         [Vy,Dy] = eig(Y);
         dy = diag(Dy);
         [t,v] = sort(dy,'ascend');
-        W{l} = Vy(:,v(1:k));
+        P{l} = Vy(:,v(1:k));
         
     %%%%%====================S{l}======================
-    wW = W{l};xX = X{l};
+    wW = P{l};xX = X{l};
         for i = 1:n
             for j = 1:n
                 f(i,j) = norm(wW'*xX(:,i)-wW'*xX(:,j),'fro')^2;
@@ -90,7 +90,7 @@ for o = 1:iter
     if ee < 1.000000000000000e-15
         break;
     else 
-        W = W;
+        P = P;
         S = S;
     end
 end

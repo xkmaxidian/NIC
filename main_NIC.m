@@ -57,7 +57,7 @@ A{1}=W1;A{2}=W2;
 [M{2}] = PMI(A{2},1);
 k=3;k2=3;%%%%%% k  is the number of feature, k1 is number of cluster
 alpha=0.02;
-[W,S,B,F,hH,err1]=clustering_NIC(XX,M,k,k2,alpha); %%% Call the main function to solve the variables 
+[P,S,B,F,hH,err1]=clustering_NIC(XX,M,k,k2,alpha); %%% Call the main function to solve the variables 
 %%%%%%%%%%% Clustering cell type label
     for e=1:size(F,2) 
         v=F(:,e);
@@ -67,4 +67,3 @@ alpha=0.02;
     end
 %%%%%%%%%%%%%%==================Performance evaluation===============================
 result1= ClusteringMeasure_new(true_label,prel) %%%% Accuracy ARI
-
